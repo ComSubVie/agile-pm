@@ -5,10 +5,11 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v5
-      - name: Compile java file
+      - name: Setup JDK
         uses: actions/setup-java@v4
         with:
           java-version: 25
+      - name: Compile java file
         run: |
           javac Hello.java
 
