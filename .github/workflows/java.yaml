@@ -1,3 +1,5 @@
+name: Java Compiler
+on: [push]
 jobs:
   build:
     steps:
