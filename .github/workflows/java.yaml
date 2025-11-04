@@ -18,5 +18,7 @@ jobs:
       - name: Compile java file
         run: |
           javac Hello.java
-
+      - name: Run class file
+        run: |
+          java Hello
 
