@@ -2,6 +2,7 @@ name: Java Compiler
 on: [push]
 jobs:
   build:
+    runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v5
@@ -9,6 +10,10 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: 25
+          cache: 'gradle'
+          cache-dependency-path: |
+            sub-project/*.gradle*
+            sub-project/**/gradle-wrapper.properties
       - name: Compile java file
         run: |
           javac Hello.java
