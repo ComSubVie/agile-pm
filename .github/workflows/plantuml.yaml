@@ -1,16 +1,19 @@
-name: generate plantuml
+name: Build
 on: [push]
 jobs:
-  generate_plantuml:
+  build:
     runs-on: ubuntu-latest
-    name: plantuml
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: plantuml
-        id: plantuml
-        uses: grassedge/generate-plantuml-action@master
-        with:
-          path: documentation 
+      - uses: actions/checkout@v5
+      - run: |
+          ./render.sh
+        working-directory: documentation
+
+      - uses: xresloader/upload-to-github-release@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          file: "documentation/public/*.svg"
+          overwrite: true
+          verbose: true
+          update_latest_release: true
